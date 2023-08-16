@@ -1,4 +1,4 @@
-runtime: java17
+runtime: java11
 instance_class: F2
 
 handlers:
@@ -21,8 +21,3 @@ health_check:
 
 network:
   session_affinity: true
-
-# Build configuration
-build:
-  artifact: target/travels-release-01.jar
-  builder: maven
