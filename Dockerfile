@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the JAR file from your local machine to the container
-ADD target/travels-release-01.jar travels-release-01.jar
+COPY target/travels-release-01.jar travels-release-01.jar
 
 # Expose the port that your application will run on
 EXPOSE 8080
