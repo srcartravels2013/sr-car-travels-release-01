@@ -11,4 +11,4 @@ ADD target/travels-release-01.jar travels-release-01.jar
 EXPOSE 8080
 
 # Command to run your application
-CMD ["java", "-jar", "/travels-release-01.jar"]
+ENTRYPOINT ["java", "-jar", "/travels-release-01.jar"]
