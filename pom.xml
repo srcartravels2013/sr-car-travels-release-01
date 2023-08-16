@@ -58,6 +58,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>travels-release-01</finalName>
 	</build>
 
 </project>
