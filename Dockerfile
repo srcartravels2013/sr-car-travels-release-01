@@ -1,8 +1,5 @@
 # Use an official OpenJDK base image
-FROM openjdk:11-jre-slim
-
-# Set the working directory in the container
-WORKDIR /app
+FROM openjdk:11
 
 # Copy the JAR file from your local machine to the container
 ADD target/travels-release-01.jar travels-release-01.jar
