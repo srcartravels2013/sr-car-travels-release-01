@@ -1,0 +1,9 @@
+runtime: java17
+entrypoint: java -Xmx64m -jar travels-release-01.jar
+instance_class: F2
+env: standard
+runtime_config:
+  jdk: openjdk17
+handlers:
+  - url: /.*
+    script: this field is required, but ignore.
