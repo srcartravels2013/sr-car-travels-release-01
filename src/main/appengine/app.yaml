@@ -1,9 +1,28 @@
 runtime: java17
-entrypoint: java -Xmx64m -jar travels-release-01.jar
 instance_class: F2
-env: standard
-runtime_config:
-  jdk: openjdk17
+
 handlers:
   - url: /.*
-    script: this field is required, but ignore.
+    script: this field is required, but ignored
+
+env_variables:
+  SPRING_PROFILES_ACTIVE: production
+  # Add any other environment variables your application needs here
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+
+health_check:
+  enable_health_check: true
+  check_interval_sec: 30
+  timeout_sec: 4
+  unhealthy_threshold: 2
+  healthy_threshold: 2
+
+network:
+  session_affinity: true
+
+# Build configuration
+build:
+  artifact: target/travels-release-01.jar
+  builder: maven
