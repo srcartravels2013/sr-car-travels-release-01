@@ -21,8 +21,3 @@ health_check:
 
 network:
   session_affinity: true
-
-# Build configuration
-build:
-  artifact: target/travels-release-01.jar
-  builder: maven
