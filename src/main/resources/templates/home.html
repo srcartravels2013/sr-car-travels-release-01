@@ -151,8 +151,8 @@ ul li h5::before {
                 class="fa fa-phone hText"></span> Call us: (+91) 9346397115</a>
 
         <div class="menuDServices">
-            <a href="home">Home</a>
-            <a style="color:white" type="button" id="onClickOurTariff" onclick="getSessionTimeRemainingTariffs()">Our<span>Tariffs</span></a>
+            <a href="/home">Home</a>
+            <a  style="color:white;display: none" type="button" id="onClickOurTariff" onclick="getSessionTimeRemainingTariffs()">Our<span>Tariffs</span></a>
             <!--<a href="assets/img/sr_car_travels_tariff.pdf" download>Download Tariff</a>-->
             <!-- Button to open popup window -->
             <a type="button" style="color:white" id="view-png">View Tariff <i><span style="color:black" id="toggleLink"
@@ -1437,17 +1437,17 @@ function getSessionTimeOutReturn() {
       var remainingTime;
 
       function getSessionTimeRemainingCityTour() {
-        window.location.href = "vijayawada-city-tour?sessionTime=" + remainingTime;
+        window.location.href = "/vijayawada-city-tour?sessionTime=" + remainingTime;
 
       }
 
        function getSessionTimeRemainingPancharama() {
-        window.location.href = "pancharama-kshetras?sessionTime=" + remainingTime;
+        window.location.href = "/pancharama-kshetras?sessionTime=" + remainingTime;
 
       }
 
       function getSessionTimeRemainingTariffs() {
-        window.location.href = "tariffs?sessionTime=" + remainingTime;
+        window.location.href = "/tariffs?sessionTime=" + remainingTime;
 
       }
 
@@ -1478,7 +1478,7 @@ function getSessionTimeOutReturn() {
     document.querySelector(".popupContainer").style.display = "block";
     document.querySelector(".popupContainer .close").addEventListener("click", function() {
     document.querySelector(".popupContainer").style.display = "none";
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
 });
     document.getElementById("submit").addEventListener("click", function() {
 
@@ -1493,10 +1493,10 @@ function getSessionTimeOutReturn() {
         var _0xea98=["\x73\x75\x62\x6D\x69\x74","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x76\x61\x6C\x75\x65","\x53\x65\x6E\x64\x69\x6E\x67\x2E\x2E\x2E","\x62\x74\x7A\x6D\x44\x72\x53\x77\x61\x75\x35\x45\x4E\x59\x35\x36\x63","\x69\x6E\x69\x74","\x53\x55\x43\x43\x45\x53\x53\x21","\x73\x74\x61\x74\x75\x73","\x74\x65\x78\x74","\x6C\x6F\x67","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x46\x41\x49\x4C\x45\x44\x2E\x2E\x2E","\x74\x68\x65\x6E","\x70\x6D\x61\x69\x6C\x31\x32\x33","\x74\x65\x6D\x70\x6C\x61\x74\x65\x5F\x64\x62\x67\x6A\x33\x31\x62","\x73\x65\x6E\x64"];const btn=document[_0xea98[1]](_0xea98[0]);btn[_0xea98[2]]= _0xea98[3];(function(){emailjs[_0xea98[5]](_0xea98[4])})();var templateParams={name:name,phone:phone,mail:email};emailjs[_0xea98[15]](_0xea98[13],_0xea98[14],templateParams)[_0xea98[12]](function(_0x1420x3){console[_0xea98[9]](_0xea98[6],_0x1420x3[_0xea98[7]],_0x1420x3[_0xea98[8]])},function(_0x1420x4){alert(JSON[_0xea98[10]](_0x1420x4));console[_0xea98[9]](_0xea98[11],_0x1420x4)})
 
 
-        window.location.href = "tariffs";
+        window.location.href = "/tariffs";
 		e.preventDefault();
         } else {
-            window.location.href = "tariffs";
+            window.location.href = "/tariffs";
 		    e.preventDefault();
         }
     });
@@ -1504,12 +1504,12 @@ function getSessionTimeOutReturn() {
     document.querySelector(".popupContainer #closeTheBodyOfForm").addEventListener("click", function(event) {
   if (event.target === document.querySelector("#closeTheBodyOfForm")) {
     document.querySelector(".popupContainer").style.display = "none";
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
   }
 });
 
 } else {
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
 }
 
 
@@ -1524,7 +1524,7 @@ function getSessionTimeOutReturn() {
     document.querySelector(".popupContainer").style.display = "block";
     document.querySelector(".popupContainer .close").addEventListener("click", function() {
     document.querySelector(".popupContainer").style.display = "none";
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
 });
     document.getElementById("submit").addEventListener("click", function() {
 
@@ -1539,10 +1539,10 @@ function getSessionTimeOutReturn() {
         var _0xea98=["\x73\x75\x62\x6D\x69\x74","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x76\x61\x6C\x75\x65","\x53\x65\x6E\x64\x69\x6E\x67\x2E\x2E\x2E","\x62\x74\x7A\x6D\x44\x72\x53\x77\x61\x75\x35\x45\x4E\x59\x35\x36\x63","\x69\x6E\x69\x74","\x53\x55\x43\x43\x45\x53\x53\x21","\x73\x74\x61\x74\x75\x73","\x74\x65\x78\x74","\x6C\x6F\x67","\x73\x74\x72\x69\x6E\x67\x69\x66\x79","\x46\x41\x49\x4C\x45\x44\x2E\x2E\x2E","\x74\x68\x65\x6E","\x70\x6D\x61\x69\x6C\x31\x32\x33","\x74\x65\x6D\x70\x6C\x61\x74\x65\x5F\x64\x62\x67\x6A\x33\x31\x62","\x73\x65\x6E\x64"];const btn=document[_0xea98[1]](_0xea98[0]);btn[_0xea98[2]]= _0xea98[3];(function(){emailjs[_0xea98[5]](_0xea98[4])})();var templateParams={name:name,phone:phone,mail:email};emailjs[_0xea98[15]](_0xea98[13],_0xea98[14],templateParams)[_0xea98[12]](function(_0x1420x3){console[_0xea98[9]](_0xea98[6],_0x1420x3[_0xea98[7]],_0x1420x3[_0xea98[8]])},function(_0x1420x4){alert(JSON[_0xea98[10]](_0x1420x4));console[_0xea98[9]](_0xea98[11],_0x1420x4)})
 
 
-        window.location.href = "tariffs";
+        window.location.href = "/tariffs";
 		e.preventDefault();
         } else {
-            window.location.href = "tariffs";
+            window.location.href = "/tariffs";
 		    e.preventDefault();
         }
     });
@@ -1550,12 +1550,12 @@ function getSessionTimeOutReturn() {
     document.querySelector(".popupContainer #closeTheBodyOfForm").addEventListener("click", function(event) {
   if (event.target === document.querySelector("#closeTheBodyOfForm")) {
     document.querySelector(".popupContainer").style.display = "none";
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
   }
 });
 
 } else {
-    window.location.href = "tariffs";
+    window.location.href = "/tariffs";
 }
 
   });

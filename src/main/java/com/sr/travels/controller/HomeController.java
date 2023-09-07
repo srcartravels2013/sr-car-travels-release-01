@@ -12,4 +12,28 @@ public class HomeController {
 
         return "home";
     }
+
+    @GetMapping("/home")
+    public String redirectHomePage() {
+
+        return "home";
+    }
+
+    @GetMapping("/tariffs")
+    public String redirectTariffsPage() {
+
+        return "tariffs";
+    }
+
+    @GetMapping("/vijayawada-city-tour")
+    public String redirectCityTourPage() {
+
+        return "vijayawada-city-tour";
+    }
+
+    @GetMapping("/pancharama-kshetras")
+    public String redirectKshetrasPage() {
+
+        return "pancharama-kshetras";
+    }
 }

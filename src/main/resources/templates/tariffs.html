@@ -65,7 +65,7 @@
 
             <div class="menuDServices">
                 <a onclick="getSessionTimeRemainingHome()">Home</a>
-                <a style="color:white" type="button" id="onClickOurTariff" onclick="getSessionTimeRemainingTariffs()">Our<span>Tariffs</span></a>
+                <!--<a style="color:white" type="button" id="onClickOurTariff" onclick="getSessionTimeRemainingTariffs()">Our<span>Tariffs</span></a>-->
                 <!--<a href="assets/img/sr_car_travels_tariff.pdf" download>Download Tariff</a>-->
                 <!-- Button to open popup window -->
                 <a type="button" style="color:white" id="view-png">View Tariff <i><span style="color:black" id="toggleLink"
@@ -1217,7 +1217,7 @@ var sessionTimeout = getSessionTimeOutReturn(); // session timeout in seconds
       }
       
       function getSessionTimeRemainingHome() {
-        window.location.href = "home?sessionTime=" + remainingTime;
+        window.location.href = "/home?sessionTime=" + remainingTime;
 
       }
 
