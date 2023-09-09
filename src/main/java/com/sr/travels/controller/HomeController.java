@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -58,8 +60,8 @@ public class HomeController {
         return null;
     }
     @RequestMapping("/submittedData")
-    public double getPrice(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
-    @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime, @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email) {
+    public ResponseEntity<Map<String, Object>> getPrice(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
+                                                        @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime, @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email) {
 
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setFromCity(fromCity);
@@ -71,6 +73,11 @@ public class HomeController {
 
         //String mailResponse = emailController.sendEmail(emailRequest);
 
-        return myService.getPrice(emailRequest);
+        // Process requestData and prepare a response
+        Map<String, Object> responseData = new HashMap<>();
+        responseData.put("message", "Data received successfully.");
+        responseData.put("data", myService.getPrice(emailRequest));
+
+        return ResponseEntity.ok(responseData);
     }
 }

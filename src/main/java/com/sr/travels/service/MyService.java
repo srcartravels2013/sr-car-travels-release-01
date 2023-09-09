@@ -24,6 +24,6 @@ public class MyService {
 
     public double getPrice(EmailRequest request) {
 
-        return 0.00;
+        return 5000.50;
     }
 }
