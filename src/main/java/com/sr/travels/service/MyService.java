@@ -1,5 +1,6 @@
 package com.sr.travels.service;
 
+import com.sr.travels.models.EmailRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,5 +20,10 @@ public class MyService {
         String response = restTemplate.getForObject(restUrl, String.class);
 
         return response;
+    }
+
+    public double getPrice(EmailRequest request) {
+
+        return 0.00;
     }
 }

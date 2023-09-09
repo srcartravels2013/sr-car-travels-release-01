@@ -1,18 +1,19 @@
 package com.sr.travels.controller;
 
+import com.sr.travels.models.EmailRequest;
 import com.sr.travels.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private EmailController emailController;
 
     @Autowired
     private MyService myService;
@@ -56,12 +57,20 @@ public class HomeController {
 
         return null;
     }
-    @PostMapping("/submittedData")
-    public ResponseEntity<String> handleFormSubmit(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
+    @RequestMapping("/submittedData")
+    public double getPrice(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
     @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime, @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email) {
-        
-        System.out.println("From City : "+ fromCity + " To City : "+ toCity + " pickUpDate : " +  pickUpDate + " PickUpTime : " + pickUpTime + " Mobile Number : " + mobNumber + " Email : " + email);
 
-        return ResponseEntity.ok("From City : "+ fromCity + " To City : "+ toCity + " pickUpDate : " +  pickUpDate + " PickUpTime : " + pickUpTime + " Mobile Number : " + mobNumber + " Email : " + email);
+        EmailRequest emailRequest = new EmailRequest();
+        emailRequest.setFromCity(fromCity);
+        emailRequest.setToCity(toCity);
+        emailRequest.setPickUpDate(pickUpDate);
+        emailRequest.setPickUpTime(pickUpTime);
+        emailRequest.setMobNumber(mobNumber);
+        emailRequest.setEmail(email);
+
+        //String mailResponse = emailController.sendEmail(emailRequest);
+
+        return myService.getPrice(emailRequest);
     }
 }
