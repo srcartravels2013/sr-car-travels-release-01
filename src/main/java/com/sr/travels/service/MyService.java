@@ -1,9 +1,13 @@
 package com.sr.travels.service;
 
 import com.sr.travels.models.EmailRequest;
+import com.sr.travels.models.Price;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class MyService {
@@ -22,8 +26,24 @@ public class MyService {
         return response;
     }
 
-    public double getPrice(EmailRequest request) {
+    public Price getPrice(EmailRequest request) {
 
-        return 5000.50;
+        Price price = new Price();
+        price.setdPrice(5000);
+        price.setePrice(5500);
+        price.setiPrice(6000);
+
+        return price;
+    }
+
+    public Map<String, Integer> getMaxKms() {
+
+        Map<String, Integer> maxKmMap = new HashMap<>();
+
+        maxKmMap.put("dMaxKm", 250);
+        maxKmMap.put("eMaxKm", 300);
+        maxKmMap.put("iMaxKm", 350);
+
+        return maxKmMap;
     }
 }

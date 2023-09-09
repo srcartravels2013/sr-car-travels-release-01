@@ -873,6 +873,17 @@ ul li h5::before {
     const hidePackages = document.getElementById('hidePackages');
     var hideCommonPackages = document.getElementsByClassName('hideCommonPackages');
 
+    var elementDPrice = document.querySelector(".card-text.highlight#dPrice");
+    var elementEPrice = document.querySelector(".card-text.highlight#ePrice");
+    var elementIPrice = document.querySelector(".card-text.highlight#iPrice");
+
+    var elementDMaxIncludedKm = document.querySelector(".card-text.highlight#dMaxIncludedKm");
+    var elementEMaxIncludedKm = document.querySelector(".card-text.highlight#eMaxIncludedKm");
+    var elementIMaxIncludedKm = document.querySelector(".card-text.highlight#iMaxIncludedKm");
+
+    var tripRoutes = document.querySelector(".tripRoutes");
+    var tripPickDate = document.querySelector(".tripPickDate");
+
     myForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the form from submitting
         hidePackages.style.display = 'block'; // Show the hidden div
@@ -895,6 +906,30 @@ ul li h5::before {
                     contentType: false,
                     success: function(response) {
                         // Handle the response from the Spring Boot controller
+
+                        console.log(response);
+
+                        elementDPrice.innerHTML = "Price: Rs. " + response.dPrice;
+                        elementDPrice.style.color = 'green';
+
+                        elementEPrice.innerHTML = "Price: Rs. " + response.ePrice;
+                        elementEPrice.style.color = 'green';
+
+                        elementIPrice.innerHTML = "Price: Rs. " + response.iPrice;
+                        elementIPrice.style.color = 'green';
+
+                        elementDMaxIncludedKm.innerHTML = "Included KM - " + response.dMaxIncludedKm + " KM";
+                        elementEMaxIncludedKm.innerHTML = "Included KM - " + response.eMaxIncludedKm + " KM";
+                        elementIMaxIncludedKm.innerHTML = "Included KM - " + response.iMaxIncludedKm + " KM";
+
+                        tripRoutes.innerHTML = response.fCity + " To " + response.tCity;
+                        tripPickDate.innerHTML = "Date planned Journey Date :  " + response.pickUpDate;
+
+                        tripRoutes.style.color = 'green';
+                        tripPickDate.style.color = 'green';
+
+                        //$("#response").html(JSON.stringify(response));
+
                         console.log("Success:", response);
                     },
                     error: function(error) {
@@ -909,18 +944,26 @@ ul li h5::before {
 </script>
 <!--</div>-->
 <div id="hidePackages">
-<h4 style="text-align:center"><span style="color:green;">Searched Results</span></h4>
+
+<div>
+    <h4 class="tripRoutes" style="text-align:center"><span id="tripRoutes" style="color:green;">Vijayawada to Hyderabad</span></h4>
+    <h4 class="tripPickDate" style="text-align:center"><span style="color:green;">Date planned Journey Date :  </span></h4>
+</div>
+
 <div class="card-group">
     <div class="card">
         <img src="assets/img/tDzire1.png" class="card-img-top" alt="dzire">
         <div class="card-body">
             <h4 class="card-title" align="center">Assured Sedan (Dzire/Etios)</h4><br>
-            <p class="card-text highlight1" align="center">Included KM - 0 KM</p>
+            <p class="card-text highlight" id="dMaxIncludedKm" align="center">Included KM - 0 KM</p>
             <p class="card-text highlight" align="center">Extra fare/Km - Rs.12/KM</p>
-            <p class="card-text highlight" align="center">Included</p>
-            <p class="card-text highlight" align="center">Included</p><hr>
-            <p class="card-text highlight" align="center">Total Price : </p><br>
-            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Book Now</a></h4>
+            <p class="card-text highlight" align="center">Driver Beta(Charges) - Included</p>
+            <p class="card-text highlight" align="center">GST 5% Extra</p>
+            <p class="card-text highlight" align="center">Toll and State Tax Extra</p>
+            <p class="card-text highlight" align="center">Parking(If Any) Extra</p>
+            <hr>
+            <p class="card-text highlight" id="dPrice" align="center">Price : Rs. </p><br>
+            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Call Now</a></h4>
         </div>
     </div>
 
@@ -928,12 +971,15 @@ ul li h5::before {
         <img src="assets/img/tErtiga1.png" alt="ertiga">
         <div class="card-body">
             <h4 class="card-title" align="center">Assured SUV (Ertiga)</h4><br>
-            <p class="card-text highlight1" align="center">Included KM - 0 KM</p>
+            <p class="card-text highlight" id="eMaxIncludedKm" align="center">Included KM - 0 KM</p>
             <p class="card-text highlight" align="center">Extra fare/Km - Rs.15/KM</p>
-            <p class="card-text highlight" align="center">Included</p>
-            <p class="card-text highlight" align="center">Included</p><hr>
-            <p class="card-text highlight" align="center">Total Price : </p><br>
-            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Book Now</a></h4>
+            <p class="card-text highlight" align="center">Driver Beta(Charges) - Included</p>
+            <p class="card-text highlight" align="center">GST 5% Extra</p>
+            <p class="card-text highlight" align="center">Toll and State Tax Extra</p>
+            <p class="card-text highlight" align="center">Parking(If Any) Extra</p>
+            <hr>
+            <p class="card-text highlight" id="ePrice" align="center">Price : Rs. </p><br>
+            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Call Now</a></h4>
         </div>
     </div>
 
@@ -941,13 +987,15 @@ ul li h5::before {
         <img src="assets/img/tInnova.png" alt="innova">
         <div class="card-body">
             <h4 class="card-title" align="center">Assured Innova / Crysta</h4><br>
-            <p class="card-text highlight1" align="center">Included KM - 0 KM</p>
+            <p class="card-text highlight" id="iMaxIncludedKm" align="center">Included KM - 0 KM</p>
             <p class="card-text highlight" align="center">Extra fare/Km - Rs.16/KM</p>
-            <p class="card-text highlight" align="center">Included</p>
-            <p class="card-text highlight" align="center">Included</p>
+            <p class="card-text highlight" align="center">Driver Beta(Charges) - Included</p>
+            <p class="card-text highlight" align="center">GST 5% Extra</p>
+            <p class="card-text highlight" align="center">Toll and State Tax Extra</p>
+            <p class="card-text highlight" align="center">Parking(If Any) Extra</p>
             <hr>
-            <p class="card-text highlight" align="center">Total Price : </p><br>
-            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Book Now</a></h4>
+            <p class="card-text highlight" id="iPrice" align="center">Price : Rs. </p><br>
+            <h4 align="center"><a href="tel:9346397115" class="btn btn-primary">Call Now</a></h4>
         </div>
     </div>
 </div>

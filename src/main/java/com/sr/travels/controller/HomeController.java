@@ -76,7 +76,20 @@ public class HomeController {
         // Process requestData and prepare a response
         Map<String, Object> responseData = new HashMap<>();
         responseData.put("message", "Data received successfully.");
-        responseData.put("data", myService.getPrice(emailRequest));
+        responseData.put("dPrice", myService.getPrice(emailRequest).getdPrice());
+        responseData.put("ePrice", myService.getPrice(emailRequest).getePrice());
+        responseData.put("iPrice", myService.getPrice(emailRequest).getiPrice());
+
+        responseData.put("fCity", fromCity);
+        responseData.put("tCity", toCity);
+
+        Map<String, Integer> kmMap = myService.getMaxKms();
+
+        responseData.put("dMaxIncludedKm", kmMap.get("dMaxKm"));
+        responseData.put("eMaxIncludedKm", kmMap.get("eMaxKm"));
+        responseData.put("iMaxIncludedKm", kmMap.get("iMaxKm"));
+
+        responseData.put("pickUpDate", pickUpDate);
 
         return ResponseEntity.ok(responseData);
     }
