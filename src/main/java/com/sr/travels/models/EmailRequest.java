@@ -9,6 +9,8 @@ public class EmailRequest {
     private String mobNumber;
     private String email;
 
+    private String tripType;
+
     public String getFromCity() {
         return fromCity;
     }
@@ -55,5 +57,13 @@ public class EmailRequest {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
     }
 }

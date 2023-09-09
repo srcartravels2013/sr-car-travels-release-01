@@ -1,6 +1,7 @@
 package com.sr.travels.controller;
 
 import com.sr.travels.models.EmailRequest;
+import com.sr.travels.models.Price;
 import com.sr.travels.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class HomeController {
         return "pancharama-kshetras";
     }
 
-    @GetMapping("/placesList")
+    /*@GetMapping("/placesList")
     public List<String> getPlaces() {
 
         String url = "https://www.mapquestapi.com/search/v3/prediction?limit=5&collection=poi%2Cairport%2Caddress%2CadminArea&undefined=undefined&q=vij&key=ck2OXUAJsF0iz999XGQ62jyXo8AXOVp7";
@@ -58,10 +59,11 @@ public class HomeController {
         String res= myService.makeRestCall(url);
 
         return null;
-    }
+    }*/
     @RequestMapping("/submittedData")
     public ResponseEntity<Map<String, Object>> getPrice(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
-                                                        @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime, @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email) {
+                                                        @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime,
+                                                        @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email, @RequestParam("tripType") String tripType) {
 
         EmailRequest emailRequest = new EmailRequest();
         emailRequest.setFromCity(fromCity);
@@ -70,24 +72,40 @@ public class HomeController {
         emailRequest.setPickUpTime(pickUpTime);
         emailRequest.setMobNumber(mobNumber);
         emailRequest.setEmail(email);
+        emailRequest.setTripType(tripType);
 
         //String mailResponse = emailController.sendEmail(emailRequest);
 
+
         // Process requestData and prepare a response
         Map<String, Object> responseData = new HashMap<>();
+
+        //double maxKm = myService.getMaxKms(emailRequest);
+        double maxKm = 301.00;
+        int maxIntKm = (int)maxKm;
+
+        responseData.put("dMaxIncludedKm", maxIntKm);
+        responseData.put("eMaxIncludedKm", maxIntKm);
+        responseData.put("iMaxIncludedKm", maxIntKm);
+
+        Price price = myService.getPrice(maxKm, emailRequest.getTripType());
+
         responseData.put("message", "Data received successfully.");
-        responseData.put("dPrice", myService.getPrice(emailRequest).getdPrice());
-        responseData.put("ePrice", myService.getPrice(emailRequest).getePrice());
-        responseData.put("iPrice", myService.getPrice(emailRequest).getiPrice());
+        responseData.put("dPrice", price.getdPrice());
+        responseData.put("ePrice", price.getePrice());
+        responseData.put("iPrice", price.getiPrice());
 
         responseData.put("fCity", fromCity);
         responseData.put("tCity", toCity);
 
-        Map<String, Integer> kmMap = myService.getMaxKms();
+        String dBetaDecesion = "Excluded";
 
-        responseData.put("dMaxIncludedKm", kmMap.get("dMaxKm"));
-        responseData.put("eMaxIncludedKm", kmMap.get("eMaxKm"));
-        responseData.put("iMaxIncludedKm", kmMap.get("iMaxKm"));
+        if(emailRequest.getTripType().equals("oneWay") ){
+            dBetaDecesion = "Included";
+        }
+        responseData.put("dDBeta", dBetaDecesion);
+        responseData.put("dEBeta", dBetaDecesion);
+        responseData.put("dIBeta", dBetaDecesion);
 
         responseData.put("pickUpDate", pickUpDate);
 

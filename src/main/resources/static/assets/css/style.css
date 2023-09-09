@@ -1,3 +1,7 @@
+.center-div-align {
+    margin-left: center; /* This pushes the div to the right */
+}
+
 #mob-div {
 display: none;
 }

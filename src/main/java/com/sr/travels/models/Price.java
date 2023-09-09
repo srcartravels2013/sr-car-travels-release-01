@@ -5,6 +5,8 @@ public class Price {
     private double dPrice;
     private double ePrice;
     private double iPrice;
+
+    private int maxKm;
     public double getdPrice() {
         return dPrice;
     }
@@ -27,5 +29,13 @@ public class Price {
 
     public void setiPrice(double iPrice) {
         this.iPrice = iPrice;
+    }
+
+    public int getMaxKm() {
+        return maxKm;
+    }
+
+    public void setMaxKm(int maxKm) {
+        this.maxKm = maxKm;
     }
 }
