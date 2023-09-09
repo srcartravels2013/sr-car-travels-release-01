@@ -2,8 +2,11 @@ package com.sr.travels.controller;
 
 import com.sr.travels.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -52,5 +55,13 @@ public class HomeController {
         String res= myService.makeRestCall(url);
 
         return null;
+    }
+    @PostMapping("/submittedData")
+    public ResponseEntity<String> handleFormSubmit(@RequestParam("fromCity") String fromCity, @RequestParam("toCity") String toCity,
+    @RequestParam("pickUpDate") String pickUpDate, @RequestParam("pickUpTime") String pickUpTime, @RequestParam("mobNumber") String mobNumber, @RequestParam("email") String email) {
+        
+        System.out.println("From City : "+ fromCity + " To City : "+ toCity + " pickUpDate : " +  pickUpDate + " PickUpTime : " + pickUpTime + " Mobile Number : " + mobNumber + " Email : " + email);
+
+        return ResponseEntity.ok("From City : "+ fromCity + " To City : "+ toCity + " pickUpDate : " +  pickUpDate + " PickUpTime : " + pickUpTime + " Mobile Number : " + mobNumber + " Email : " + email);
     }
 }

@@ -786,7 +786,7 @@ ul li h5::before {
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <span class="text-danger">*</span>
                 </span>
-                               <input type="text" id="pickupCity" class="search-input form-control" placeholder="Enter Pickup City" required>
+                               <input type="text" id="pickupCity" class="search-input form-control" name="fromCity" placeholder="Enter Pickup City" required>
                                 <ul id="results" class="dropdown-menu" role="menu"></ul>
                             </div>
                         </div>
@@ -798,7 +798,7 @@ ul li h5::before {
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <span class="text-danger">*</span>
                 </span>
-                                <input type="text" class="form-control" id="destinationCity" placeholder="Enter Destination City" required>
+                                <input type="text" class="form-control" id="destinationCity" name="toCity" placeholder="Enter Destination City" required>
                             </div>
                         </div>
 
@@ -809,13 +809,13 @@ ul li h5::before {
                             <label for="pickupDate">
                                 <span class="glyphicon glyphicon-calendar"></span> Pick Up Date <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" id="pickupDate" placeholder="Select Pick Up Date" required>
+                            <input type="text" class="form-control" id="pickupDate" name="pickUpDate" placeholder="Select Pick Up Date" required>
                         </div>
                         <div class="form-group">
                             <label for="pickupTime">
                                 <span class="glyphicon glyphicon-time"></span> Pick Up Time <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" id="pickupTime" placeholder="Select Pick Up Time" required>
+                            <input type="text" class="form-control" id="pickupTime" name="pickUpTime" placeholder="Select Pick Up Time" required>
                         </div>
 
 
@@ -831,7 +831,7 @@ ul li h5::before {
                     <span class="glyphicon glyphicon-phone"></span>
                     <span class="text-danger">*</span>
                 </span>
-                                <input type="tel" class="form-control" id="mobileNumber" placeholder="Mobile Number" required>
+                                <input type="tel" class="form-control" id="mobileNumber" name="mobNumber" placeholder="Mobile Number" required>
                             </div>
                         </div>
                         </div>
@@ -841,7 +841,7 @@ ul li h5::before {
                             <label for="email">
                                 <span class="glyphicon glyphicon-envelope"></span> Email
                             </label>
-                            <input type="email" class="form-control" id="email" placeholder="Enter your email (Optional)">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email (Optional)">
                         </div>
                         </div>
                         </div>
@@ -881,6 +881,27 @@ ul li h5::before {
                 for (var i = 0; i < hideCommonPackages.length; i++) {
                     hideCommonPackages[i].style.display = "none";
                 }
+
+
+         // Collect form data using JavaScript
+                var formData = new FormData(myForm);
+
+                // Send form data to a Spring Boot controller using AJAX
+                $.ajax({
+                    type: "POST", // or "GET" depending on your use case
+                    url: "/submittedData",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Handle the response from the Spring Boot controller
+                        console.log("Success:", response);
+                    },
+                    error: function(error) {
+                        // Handle any errors
+                        console.error("Error:", error);
+                    }
+                });
 
     });
 });
