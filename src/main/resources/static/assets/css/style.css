@@ -1,3 +1,19 @@
+#mob-div {
+display: none;
+}
+
+#desktop-div {
+display: none;
+}
+
+#hideCommonPackages {
+display: block;
+}
+
+#hidePackages {
+display: none;
+}
+
 .right-div {
     margin-left: auto; /* This pushes the div to the right */
 }
