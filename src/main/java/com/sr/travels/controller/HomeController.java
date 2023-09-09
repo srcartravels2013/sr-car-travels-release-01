@@ -1,5 +1,6 @@
 package com.sr.travels.controller;
 
+import com.sr.travels.models.City;
 import com.sr.travels.models.EmailRequest;
 import com.sr.travels.models.Price;
 import com.sr.travels.service.MyService;
@@ -107,6 +108,17 @@ public class HomeController {
 
         responseData.put("pickUpDate", pickUpDate);
 
+        return ResponseEntity.ok(responseData);
+    }
+
+    @GetMapping("/cities")
+    private ResponseEntity<Map<String, Object>> getCitiesList(@RequestParam("search") String query){
+
+        Map<String, Object> responseData = new HashMap<>();
+
+        List<City>  cities = myService.getCities(query);
+
+        responseData.put("cities", cities);
         return ResponseEntity.ok(responseData);
     }
 }

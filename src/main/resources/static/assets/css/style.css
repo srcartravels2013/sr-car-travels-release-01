@@ -1,3 +1,51 @@
+
+/* Style the search input */
+#citySearch-dest {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Style the city list container */
+.city-list-dest {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    opacity: 0; /* Initial opacity set to 0 */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+/* Style the search input */
+#citySearch {
+    width: 100%;
+    padding: 10px;
+}
+
+/* Style the city list container */
+.city-list {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    opacity: 0; /* Initial opacity set to 0 */
+    transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+/* Style individual city items */
+.city-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Show the city list when it has content */
+.city-list:has(.city-item) {
+    opacity: 1; /* Adjust the opacity as needed */
+}
+
 .center-div-align {
     margin-left: center; /* This pushes the div to the right */
 }

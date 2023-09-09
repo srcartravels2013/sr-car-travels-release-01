@@ -115,6 +115,13 @@ ul li h5::before {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js">
     </script>
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.min.js"></script>
+
 
 
 </head>
@@ -810,42 +817,44 @@ ul li h5::before {
                             <div class="col-md-6">
 
                         <div class="form-group">
-                            <label for="pickupCity">From City</label>
+                            <label for="citySearch">From City</label>
                             <div class="input-group">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <span class="text-danger">*</span>
                 </span>
-                               <input type="text" id="pickupCity" class="search-input form-control" name="fromCity" placeholder="Enter Pickup City" required>
-                                <ul id="results" class="dropdown-menu" role="menu"></ul>
+                               <input type="text" id="citySearch" class="search-input form-control" name="fromCity" placeholder="Enter Pickup City" required>
                             </div>
+                            <div id="cityList" class="city-list"></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="destinationCity">To City</label>
+                            <label for="citySearch-dest">To City</label>
                             <div class="input-group">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-map-marker"></span>
                     <span class="text-danger">*</span>
                 </span>
-                                <input type="text" class="form-control" id="destinationCity" name="toCity" placeholder="Enter Destination City" required>
+                                <input type="text" class="form-control" id="citySearch-dest" name="toCity" placeholder="Enter Destination City" required>
                             </div>
+
+                            <div id="cityList-dest" class="city-list-dest"></div>
                         </div>
 
                         </div>
 
                             <div class="col-md-6">
                         <div class="form-group">
-                            <label for="pickupDate">
+                            <label for="datepicker">
                                 <span class="glyphicon glyphicon-calendar"></span> Pick Up Date <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" id="pickupDate" name="pickUpDate" placeholder="Select Pick Up Date" required>
+                            <input type="text" class="form-control" id="datepicker" name="pickUpDate" placeholder="Select Pick Up Date" required>
                         </div>
                         <div class="form-group">
-                            <label for="pickupTime">
+                            <label for="timepicker">
                                 <span class="glyphicon glyphicon-time"></span> Pick Up Time <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control" id="pickupTime" name="pickUpTime" placeholder="Select Pick Up Time" required>
+                            <input type="text" class="form-control" id="timepicker" name="pickUpTime" placeholder="Select Pick Up Time" required>
                         </div>
 
 
@@ -895,6 +904,112 @@ ul li h5::before {
         </div>
     </div>
     </form>
+
+<script>
+
+    $(function() {
+    $("#datepicker").datepicker({
+        dateFormat: "yy-mm-dd", // Set the date format
+        minDate: new Date(),    // Set a minimum date (e.g., today)
+        maxDate: "+1Y",         // Set a maximum date (e.g., one year from today)
+        changeMonth: true,      // Allow changing months
+        changeYear: true        // Allow changing years
+    });
+});
+
+</script>
+
+<script>
+
+    $(document).ready(function() {
+    $("#timepicker").timepicker({
+        timeFormat: "H:i",    // Set the time format (24-hour format)
+        interval: 15,         // Set the time increment (15 minutes)
+        scrollbar: true       // Enable scrollbar for easier time selection
+    });
+});
+
+</script>
+
+<script>
+
+    const citySearch = document.getElementById("citySearch");
+const cityList = document.getElementById("cityList");
+
+citySearch.addEventListener("input", function() {
+    const searchValue = citySearch.value.toLowerCase();
+
+    // Make an AJAX call to the Spring Boot REST endpoint
+    fetch(`/cities?search=${searchValue}`)
+        .then(response => response.json())
+        .then(data => {
+            // Clear the city list
+            cityList.innerHTML = "";
+
+            console.log(data);
+
+            const citiesArray = data.cities;
+
+            // Populate the city list with the fetched cities
+            citiesArray.forEach(city => {
+                const cityItem = document.createElement("div");
+                cityItem.textContent = city.cityName;
+                cityItem.classList.add("city-item");
+                cityItem.addEventListener("click", function() {
+                    // Set the selected city in the input field when clicked
+                    citySearch.value = city.cityName;
+                    cityList.innerHTML = "";
+                });
+                cityList.appendChild(cityItem);
+            });
+
+            // Apply opacity to the city list
+            cityList.style.opacity = "0.7";
+        })
+        .catch(error => console.error("Error fetching cities:", error));
+});
+
+</script>
+
+<script>
+
+    const citySearchDest = document.getElementById("citySearch-dest");
+const cityListDest = document.getElementById("cityList-dest");
+
+citySearchDest.addEventListener("input", function() {
+    const searchValueDest = citySearchDest.value.toLowerCase();
+
+    // Make an AJAX call to the Spring Boot REST endpoint
+    fetch(`/cities?search=${searchValueDest}`)
+        .then(response => response.json())
+        .then(data => {
+            // Clear the city list
+            cityListDest.innerHTML = "";
+
+            console.log(data);
+
+            const citiesArray = data.cities;
+
+            // Populate the city list with the fetched cities
+            citiesArray.forEach(city => {
+                const cityItem = document.createElement("div");
+                cityItem.textContent = city.cityName;
+                cityItem.classList.add("city-item");
+                cityItem.addEventListener("click", function() {
+                    // Set the selected city in the input field when clicked
+                    citySearchDest.value = city.cityName;
+                    cityListDest.innerHTML = "";
+                });
+                cityListDest.appendChild(cityItem);
+            });
+
+            // Apply opacity to the city list
+            cityListDest.style.opacity = "0.7";
+        })
+        .catch(error => console.error("Error fetching cities:", error));
+});
+
+</script>
 
 <script>
 

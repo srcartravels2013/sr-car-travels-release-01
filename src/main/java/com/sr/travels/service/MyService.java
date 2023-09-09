@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class MyService {
@@ -26,7 +24,7 @@ public class MyService {
 
         try {
             response = restTemplate.getForObject(restUrl, GeoData.class);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -37,7 +35,7 @@ public class MyService {
 
         Price price = null;
 
-        if(tripType.equals("roundTrip")){
+        if (tripType.equals("roundTrip")) {
             price = getPriceForRoundTrip(distance);
 
 
@@ -58,13 +56,13 @@ public class MyService {
         int baseFareCostD = totalKm * 10;
         int baseFareCostE = totalKm * 12;
         int baseFareCostI = totalKm * 13;
-        int tollsCount = km/50;
+        int tollsCount = km / 50;
 
         int tollPrice = tollsCount * 100;
 
-        int reasonablePriceForDVehicles = baseFareCostD + tollPrice + 500 ;
-        int reasonablePriceForEVehicles = baseFareCostE + tollPrice + 500 ;
-        int reasonablePriceForIVehicles = baseFareCostI + tollPrice + 500 ;
+        int reasonablePriceForDVehicles = baseFareCostD + tollPrice + 500;
+        int reasonablePriceForEVehicles = baseFareCostE + tollPrice + 500;
+        int reasonablePriceForIVehicles = baseFareCostI + tollPrice + 500;
 
         price.setdPrice(reasonablePriceForDVehicles);
         price.setePrice(reasonablePriceForEVehicles);
@@ -83,13 +81,13 @@ public class MyService {
         int baseFareCostD = totalKm * 12;
         int baseFareCostE = totalKm * 15;
         int baseFareCostI = totalKm * 16;
-        int tollsCount = totalKm/50;
+        int tollsCount = totalKm / 50;
 
         int tollPrice = tollsCount * 100;
 
-        int reasonablePriceForDVehicles = baseFareCostD + tollPrice + 500 ;
-        int reasonablePriceForEVehicles = baseFareCostE + tollPrice + 500 ;
-        int reasonablePriceForIVehicles = baseFareCostI + tollPrice + 500 ;
+        int reasonablePriceForDVehicles = baseFareCostD + tollPrice + 500;
+        int reasonablePriceForEVehicles = baseFareCostE + tollPrice + 500;
+        int reasonablePriceForIVehicles = baseFareCostI + tollPrice + 500;
 
         price.setdPrice(reasonablePriceForDVehicles);
         price.setePrice(reasonablePriceForEVehicles);
@@ -108,8 +106,8 @@ public class MyService {
         GeoData fromRawDataFrom = makeRestCall(restUrlFrom);
         GeoData fromRawDataTo = makeRestCall(restUrlTo);
 
-        List<GeoResult> geoResFrom =  fromRawDataFrom.getResults();
-        List<GeoResult> geoResTo =  fromRawDataTo.getResults();
+        List<GeoResult> geoResFrom = fromRawDataFrom.getResults();
+        List<GeoResult> geoResTo = fromRawDataTo.getResults();
 
         GeoLatLng geoLatLngFrom = getGeoLongLat(geoResFrom);
         GeoLatLng geoLatLngTo = getGeoLongLat(geoResTo);
@@ -118,27 +116,6 @@ public class MyService {
         double distance = Utils.calculateDistance(geoLatLngFrom.getLat(), geoLatLngFrom.getLng()
                 , geoLatLngTo.getLat(), geoLatLngTo.getLng()) + 50;
 
-        /*int tollsCount = (int) (distance/50);
-
-        int tollPrice = tollsCount * 100;
-
-        int fuelCostForDVehicles  = (int) (distance/18) * 112;
-        int fuelCostForEVehicles  = (int) (distance/15) * 112;
-        int fuelCostForIVehicles  = (int) (distance/11) * 100;
-
-        int basePriceForDVehicles = fuelCostForDVehicles + tollPrice + 500 ;
-        int basePriceForEVehicles = fuelCostForEVehicles + tollPrice + 500 ;
-        int basePriceForIVehicles = fuelCostForIVehicles + tollPrice + 500 ;
-
-        int reasonablePriceForDVehicles = 2 * basePriceForDVehicles ;
-        int reasonablePriceForEVehicles = 2 * basePriceForEVehicles ;
-        int reasonablePriceForIVehicles = 2 * basePriceForIVehicles ;
-
-
-        maxKmMap.put("dMaxKm", distance);
-        maxKmMap.put("eMaxKm", distance);
-        maxKmMap.put("iMaxKm", distance);*/
-
         return distance;
     }
 
@@ -146,9 +123,9 @@ public class MyService {
 
         GeoLatLng geoLatLng = null;
         double latitudeFrom;
-        for (GeoResult geoResult: geoRes) {
-            List<GeoLocation>  geoLocation = geoResult.getLocations();
-            for (GeoLocation geoLoc: geoLocation) {
+        for (GeoResult geoResult : geoRes) {
+            List<GeoLocation> geoLocation = geoResult.getLocations();
+            for (GeoLocation geoLoc : geoLocation) {
 
                 geoLatLng = geoLoc.getLatLng();
 
@@ -157,5 +134,44 @@ public class MyService {
 
         }
         return geoLatLng;
+    }
+
+    public List<CitiesData> getCitiesByCallingRestApi(String query) {
+        // Define the URL and perform an HTTP GET request
+
+        String restUrl = "https://api.cabbazar.com/place/autocomplete?input=" +query;
+
+        List<CitiesData> response = null;
+
+        try {
+            response = restTemplate.getForObject(restUrl, List.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return response;
+    }
+
+    public List<City> getCities(String query) {
+
+        List<CitiesData> cities = getCitiesByCallingRestApi(query);
+        City cityData = null;
+        List<City> citiesResult = new ArrayList<>();
+
+        try {
+            for (Object city : cities) {
+
+               Map<String, String>  mData = (LinkedHashMap<String, String>)city;
+                cityData = new City();
+
+                cityData.setCityName(mData.get("address"));
+                citiesResult.add(cityData);
+
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return citiesResult;
     }
 }
