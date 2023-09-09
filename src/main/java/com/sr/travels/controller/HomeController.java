@@ -74,14 +74,12 @@ public class HomeController {
         emailRequest.setEmail(email);
         emailRequest.setTripType(tripType);
 
-        //String mailResponse = emailController.sendEmail(emailRequest);
-
+        String mailResponse = emailController.sendEmail(emailRequest);
 
         // Process requestData and prepare a response
         Map<String, Object> responseData = new HashMap<>();
 
-        //double maxKm = myService.getMaxKms(emailRequest);
-        double maxKm = 301.00;
+        double maxKm = myService.getMaxKms(emailRequest);
         int maxIntKm = (int)maxKm;
 
         responseData.put("dMaxIncludedKm", maxIntKm);
