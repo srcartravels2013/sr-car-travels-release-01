@@ -1,3 +1,32 @@
+.right-div {
+    margin-left: auto; /* This pushes the div to the right */
+}
+/* Define a class for the div element */
+.background-image {
+    background-image: url('/assets/img/mid-shot-woman-hand-pic.jpg'); /* Specify the path to your image */
+    background-size: cover; /* Adjust how the image fits within the div */
+    width: 100%; /* Set the width of the div */
+    height: 100%; /* Set the height of the div */
+    /* You can also add other styles like background-repeat, background-position, etc. */
+}
+#searchResults {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+
+#searchResults li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+#searchResults li:hover {
+    background-color: #f2f2f2;
+}
+
+
 .title-link::before {
   content: attr(title);
   display: inline-block;
