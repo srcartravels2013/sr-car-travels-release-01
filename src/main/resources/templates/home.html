@@ -871,10 +871,17 @@ ul li h5::before {
     document.addEventListener('DOMContentLoaded', function() {
     const myForm = document.getElementById('myForm');
     const hidePackages = document.getElementById('hidePackages');
+    var hideCommonPackages = document.getElementsByClassName('hideCommonPackages');
 
     myForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent the form from submitting
         hidePackages.style.display = 'block'; // Show the hidden div
+
+        // Loop through the selected elements and change their display property
+                for (var i = 0; i < hideCommonPackages.length; i++) {
+                    hideCommonPackages[i].style.display = "none";
+                }
+
     });
 });
 
@@ -925,10 +932,10 @@ ul li h5::before {
 </div>
 </div>
 
-<div>
+<div class="hideCommonPackages">
 <h2 style="text-align:center">Our<span style="color:red;">Packages</span></h2>
 </div>
-<div id="dHide">
+<div class="hideCommonPackages" id="dHide">
     <div align="center">
         <img decoding="async" src="assets/img/tDzire1.png" alt="dzire"/>
     </div>
@@ -980,7 +987,7 @@ ul li h5::before {
     </div>
 </div>
 <br>
-<div id="mHide" class="card-group">
+<div id="mHide" class="hideCommonPackages card-group">
     <div class="card">
         <img src="assets/img/tDzire1.png" class="card-img-top" alt="dzire">
         <div class="card-body">
