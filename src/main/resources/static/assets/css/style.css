@@ -1,4 +1,17 @@
+/* Define the tooltip's initial style */
+#tooltip {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 999;
+}
 
+.hidden {
+  display: none;
+}
 /* Style the search input */
 #citySearch-dest {
     width: 100%;

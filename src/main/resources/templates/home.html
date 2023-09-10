@@ -814,6 +814,7 @@ ul li h5::before {
                                 <input type="text" id="citySearch" class="search-input form-control" name="fromCity" placeholder="Enter Pickup City" required>
                             </div>
                             <div id="cityList" class="city-list position-relative"></div>
+
                         </div>
 
                            </div>
@@ -908,6 +909,10 @@ ul li h5::before {
             <div class="alert alert-success text-center" role="alert" style="display:none;">
                 Your form has been submitted successfully!
             </div>
+
+        <div id="tooltip" align="center">
+            Vijayawada to Hyderabad special packages available. Check below.
+        </div>
         </div>
     </div>
     </form>
@@ -937,6 +942,19 @@ ul li h5::before {
 });
 
 </script>
+<script>
+
+    // Function to show the tooltip
+function showTooltip() {
+  tooltip.style.display = 'block';
+}
+
+// Function to hide the tooltip
+function hideTooltip() {
+  tooltip.style.display = 'none';
+}
+
+</script>
 
 <script>
 
@@ -945,6 +963,15 @@ const cityList = document.getElementById("cityList");
 
 citySearch.addEventListener("input", function() {
     const searchValue = citySearch.value.toLowerCase();
+
+
+    // Check if the input contains "hyd" or "hyderabad"
+  if (searchValue.includes('hyd') || searchValue.includes('hyderabad')) {
+    showTooltip();
+  } else {
+    hideTooltip();
+  }
+
 
     // Make an AJAX call to the Spring Boot REST endpoint
     fetch(`/cities?search=${searchValue}`)
@@ -985,6 +1012,13 @@ const cityListDest = document.getElementById("cityList-dest");
 
 citySearchDest.addEventListener("input", function() {
     const searchValueDest = citySearchDest.value.toLowerCase();
+
+    // Check if the input contains "hyd" or "hyderabad"
+  if (searchValueDest.includes('hyd') || searchValueDest.includes('hyderabad')) {
+    showTooltip();
+  } else {
+    hideTooltip();
+  }
 
     // Make an AJAX call to the Spring Boot REST endpoint
     fetch(`/cities?search=${searchValueDest}`)
@@ -1099,6 +1133,36 @@ citySearchDest.addEventListener("input", function() {
                 });
 
     });
+});
+
+</script>
+
+<script>
+
+    // Get references to the input field and the tooltip div
+const searchInput = document.getElementById('searchInput');
+const tooltip = document.getElementById('tooltip');
+
+// Function to show the tooltip
+function showTooltip() {
+  tooltip.style.display = 'block';
+}
+
+// Function to hide the tooltip
+function hideTooltip() {
+  tooltip.style.display = 'none';
+}
+
+// Add an event listener to the input field for input events
+searchInput.addEventListener('input', function () {
+  const searchText = searchInput.value.toLowerCase();
+
+  // Check if the input contains "hyd" or "hyderabad"
+  if (searchText.includes('hyd') || searchText.includes('hyderabad')) {
+    showTooltip();
+  } else {
+    hideTooltip();
+  }
 });
 
 </script>
